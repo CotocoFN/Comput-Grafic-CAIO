@@ -1,3 +1,7 @@
+// Use W A S D para mover o cubo
+// segure o clique do mouse para aumentar o cubo
+// solte o mouse e ele volta ao normal
+
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
@@ -29,23 +33,22 @@ scene.add( cube );
 
 camera.position.z = 5;
 
-// Variáveis para controle
 let moveSpeed = 0.5;  // Velocidade de movimento do cubo
 let isMouseDown = false;  // Verifica se o botão do mouse está pressionado
 let normalScale = { x: 1, y: 1, z: 1 };
 
-// Função de animação
+
 function animate() {
     // Rotacão do cubo e arestas
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    edgesMesh.rotation.x += 0.01;
-    edgesMesh.rotation.y += 0.01;
+    cube.rotation.x += 0.05;
+    cube.rotation.y += 0.05;
+    edgesMesh.rotation.x += 0.05;
+    edgesMesh.rotation.y += 0.05;
 
     // Se o mouse estiver pressionado, aumenta o tamanho do cubo
     if (isMouseDown) {
-        cube.scale.set(1.5, 1.5, 1.5);
-        edgesMesh.scale.set(1.5,1.5,1.5);
+        cube.scale.set(2, 2, 2);
+        edgesMesh.scale.set(2,2,2);
     } else {
         cube.scale.set(normalScale.x, normalScale.y, normalScale.z);  // Volta ao tamanho normal
         edgesMesh.scale.set(normalScale.x, normalScale.y, normalScale.z); 
@@ -57,24 +60,25 @@ function animate() {
 // Eventos de teclado
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
-        case 'w':  // W: move pra cima
+        case 'w':  // W: mover para cima
             cube.position.y += moveSpeed;
             edgesMesh.position.y += moveSpeed;
             break;
-        case 's':  // S: move pra baixo
-            cube.posision.y -= moveSpeed;
+        case 's':  // S: mover para baixo
+            cube.position.y -= moveSpeed;
             edgesMesh.position.y -= moveSpeed;
             break;
-        case 'a':  // A: move pra esquerda
+        case 'a':  // A: mover para a esquerda
             cube.position.x -= moveSpeed;
             edgesMesh.position.x -= moveSpeed;
             break;
-        case 'd':  // D: move pra direita
+        case 'd':  // D: mover para a direita
             cube.position.x += moveSpeed;
             edgesMesh.position.x += moveSpeed;
             break;
     }
 });
+
 
 // Evento de mouse para aumentar e reduzir o cubo
 window.addEventListener('mousedown', () => {
